@@ -11,7 +11,10 @@
     "ethash": {}
   },
   "difficulty": "1",
-  "coinbase": "",
-  "gasLimit": "12000000",
-  "alloc": {}
+  "gasLimit": "0x2fefd8",
+  "alloc": {
+    "0xD5084879c1877E8Ae07bec6b9a192A157F5b6B07": {
+      "balance": "5000000000"
+    }
+  }
 }
