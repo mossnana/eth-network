@@ -1,0 +1,84 @@
+version: "3.9"
+
+name: eth-network
+
+services:
+  mybootnode:
+    container_name: bootnode
+    hostname: mybootnode
+    env_file:
+      - .env
+    build:
+      context: .
+      args:
+        - ACCOUNT_PASSWORD=${ACCOUNT_PASSWORD}
+    command: --nodekeyhex="${BOOTNODE_KEY}" --nodiscover --ipcdisable --networkid=${NETWORK_ID} --netrestrict="172.16.254.0/28"
+    networks:
+      priv-eth-net:
+  miner-1:
+    container_name: miner-1
+    hostname: miner-1
+    env_file:
+      - .env
+    build:
+      context: .
+      args:
+        - ACCOUNT_PASSWORD=${ACCOUNT_PASSWORD}
+    command: --bootnodes="enode://${BOOTNODE_ADDRESS}@mybootnode:30303" --mine --miner.threads=1 --networkid=${NETWORK_ID} --netrestrict="172.16.254.0/28"
+    networks:
+      priv-eth-net:
+  miner-2:
+    container_name: miner-2
+    hostname: miner-2
+    env_file:
+      - .env
+    build:
+      context: .
+      args:
+        - ACCOUNT_PASSWORD=${ACCOUNT_PASSWORD}
+    command: --bootnodes="enode://${BOOTNODE_ADDRESS}@mybootnode:30303" --mine --miner.threads=1 --networkid=${NETWORK_ID} --netrestrict="172.16.254.0/28"
+    networks:
+      priv-eth-net:
+  miner-3:
+    container_name: miner-3
+    hostname: miner-3
+    env_file:
+      - .env
+    build:
+      context: .
+      args:
+        - ACCOUNT_PASSWORD=${ACCOUNT_PASSWORD}
+    command: --bootnodes="enode://${BOOTNODE_ADDRESS}@mybootnode:30303" --mine --miner.threads=1 --networkid=${NETWORK_ID} --netrestrict="172.16.254.0/28"
+    networks:
+      priv-eth-net:
+  miner-4:
+    container_name: miner-4
+    hostname: miner-4
+    env_file:
+      - .env
+    build:
+      context: .
+      args:
+        - ACCOUNT_PASSWORD=${ACCOUNT_PASSWORD}
+    command: --bootnodes="enode://${BOOTNODE_ADDRESS}@mybootnode:30303" --mine --miner.threads=1 --networkid=${NETWORK_ID} --netrestrict="172.16.254.0/28"
+    networks:
+      priv-eth-net:
+  miner-5:
+    container_name: miner-5
+    hostname: miner-5
+    env_file:
+      - .env
+    build:
+      context: .
+      args:
+        - ACCOUNT_PASSWORD=${ACCOUNT_PASSWORD}
+    command: --bootnodes="enode://${BOOTNODE_ADDRESS}@mybootnode:30303" --mine --miner.threads=1 --networkid=${NETWORK_ID} --netrestrict="172.16.254.0/28"
+    networks:
+      priv-eth-net:
+
+networks:
+  priv-eth-net:
+    driver: bridge
+    ipam:
+      config:
+        - subnet: 172.16.254.0/28
